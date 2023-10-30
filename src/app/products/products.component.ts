@@ -10,7 +10,7 @@ import { ProductService } from '../data/services/product.service';
 
 export class ProductsComponent implements OnInit {
 
-  pageTitle: string = "Product List";
+  pageTitle: string = "Product Management";
   imageWidth: number=50;
   imageMargin: number=2;
   showImage: boolean=false;
