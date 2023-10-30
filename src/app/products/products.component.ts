@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../data/models/products';
+import { ProductService } from '../data/services/product.service';
 
 @Component({
   selector: 'pm-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
+
 export class ProductsComponent implements OnInit {
 
   pageTitle: string = "Product List";
@@ -14,6 +16,8 @@ export class ProductsComponent implements OnInit {
   showImage: boolean=false;
   
   private _listFilter: string='';
+
+  constructor(private productService: ProductService) { }
 
   get listFilter():string{
     
@@ -28,34 +32,13 @@ export class ProductsComponent implements OnInit {
 
   }
 
-  products: IProduct[] =[
-    {
-      "productId":2,
-      "productName":"Garden Cart",
-      "productCode":"GDN-123",
-      "releaseDate":"March 12, 2023",
-      "description":"14 gallon capacity rolling garden cart",
-      "price": 32.99,
-      "starRating":3,
-      "imageUrl": "assets/images/garden_cart.png"
-    },
-    {
-      "productId":4,
-      "productName":"Hammer",
-      "productCode":"HMMR3-123",
-      "releaseDate":"June 12, 2023",
-      "description":"Its just a hammer",
-      "price": 99.99,
-      "starRating": 4.8,
-      "imageUrl": "assets/images/hammer.png"
-    }
-  ];
-
+  products: IProduct[] =[];
   filteredProduct: IProduct[]=[];
 
   ngOnInit(): void {
    
-    this.listFilter="";
+    this.products= this.productService.getProduct();
+    this.filteredProduct= this.products;
   }
 
   toggleImage():void{
@@ -73,7 +56,7 @@ export class ProductsComponent implements OnInit {
     this.pageTitle="Product List:"+ message;
   }
   
-  constructor() { }
+  
 
  
 
