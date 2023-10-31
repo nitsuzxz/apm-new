@@ -1,34 +1,38 @@
 import { Injectable } from "@angular/core";
 import { IProduct } from "../models/products";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Observable ,catchError,tap, throwError} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class ProductService {
-  
-    getProduct():IProduct[]{
-        return[
-            {
-                "productId":2,
-                "productName":"Garden Cart",
-                "productCode":"GDN-123",
-                "releaseDate":"March 12, 2023",
-                "description":"14 gallon capacity rolling garden cart",
-                "price": 32.99,
-                "starRating":3,
-                "imageUrl": "assets/images/garden_cart.png"
-              },
-              {
-                "productId":4,
-                "productName":"Hammer",
-                "productCode":"HMMR3-123",
-                "releaseDate":"June 12, 2023",
-                "description":"Its just a hammer",
-                "price": 99.99,
-                "starRating": 4.8,
-                "imageUrl": "assets/images/hammer.png"
-              }
-        ]
+    export class ProductService {
+    
+        private productUrl: string='api/products/products.json';
+
+        constructor(private http: HttpClient){};
+        
+        getProduct(): Observable<IProduct[]>{
+            return this.http.get<IProduct[]>(this.productUrl).pipe(
+                tap(data=> console.log(JSON.stringify(data))),
+                catchError(this.handleError)
+            );
+        }
+
+        private handleError(err: HttpErrorResponse){
+
+            let errorMessage="";
+
+            if (err.error instanceof ErrorEvent) {
+                errorMessage=   `An error occurred ${err.error.message}`;
+            } else {
+                errorMessage=`Server returned ${err.status}, error message is: ${err.message}`
+            }
+
+            console.log(errorMessage);
+        
+            return throwError(()=>errorMessage);
+        }
+
     }
-}
