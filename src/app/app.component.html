@@ -1,13 +1,21 @@
-<pm-products>
- 
-</pm-products>
+<div class="pl-5">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
+    <div class="collapse navbar-collapse" >
+      <a class="navbar-brand">{{pageTitle}}</a>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+            <a class="nav-link" routerLink='/welcome'>Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink='/products'>Product list</a>
+        </li>
+      </ul>
 
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
+    </div>
+  </nav>
+</div>
+<div class="container mt-2">
+    <router-outlet></router-outlet>
+</div>
+  
