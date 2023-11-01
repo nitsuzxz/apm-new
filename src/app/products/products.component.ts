@@ -41,7 +41,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
    
-    this.sub=this.productService.getProduct().subscribe({
+    this.sub=this.productService.getProducts().subscribe({
       next: products => {
         this.products = products;
         this.filteredProduct= products;
